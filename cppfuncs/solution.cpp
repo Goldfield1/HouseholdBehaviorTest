@@ -4,7 +4,7 @@
 #include <tuple>
 #endif
 
-namespace single {
+namespace solution {
     typedef struct {
         
         double a;
@@ -330,8 +330,8 @@ namespace single {
                         nlopt_set_lower_bounds(opt2, lb);
                         nlopt_set_upper_bounds(opt2, ub);
 
-                        nlopt_set_ftol_abs(opt2, 1.0e-12);
-                        nlopt_set_xtol_abs1(opt2, 1.0e-10);
+                        nlopt_set_ftol_abs(opt2, 1.0e-9);
+                        nlopt_set_xtol_abs1(opt2, 1.0e-9);
 
 
                         //nlopt_set_initial_step1(opt2, 0.0000001);
@@ -356,58 +356,8 @@ namespace single {
                         sol->c[idx] =  x[0];
                         sol->V[idx] = -minf;
 
-                        solver_data->last_h = x[1] / 1.001;
-                        solver_data->last_c = x[0] * 1.001;
-
-                        /*
-                        auto c_next = sol->c[index::index3(t+1,iA,0,par->T,par->Na,par->Nk)];
-
-                        // objfunc_egm(double h, double* c_next, void *solver_data_in, int iIn){
-                        sol->c_egm[idx] = egm_step(sol->h[index::index3(t,iA,0,par->T,par->Na,par->Nk)] ,sol->c, solver_data, iA);
-                        */ 
-                        // EGM //
-                        /* 
-                        solver_data_egm->a = a;
-                        solver_data_egm->capital = k;
-                        solver_data_egm->t = t;
-                        solver_data_egm->iIn = iA;
-                        //solver_data_egm->V_next = &sol->V[index::index3(t+1,0,0,par->T,par->Na,par->Nk)];
-
-                        solver_data_egm->V_next = &sol->V[index::index3(t+1,0,0,par->T,par->Na,par->Nk)];
-                        solver_data_egm->c_next = &sol->c[index::index3(t+1,0,ik,par->T,par->Na,par->Nk)];;
-
-                        solver_data_egm->par = par;
-                        
-                        nlopt_set_min_objective(opt_egm, objfunc_egm, solver_data_egm);
-
-                        lb_egm[0] = 0.1;
-                        ub_egm[0] = 10;
-                        nlopt_set_lower_bounds(opt_egm, lb_egm);
-                        nlopt_set_upper_bounds(opt_egm, ub_egm);
-                        nlopt_set_ftol_abs(opt_egm, 1.0e-12);
-                        nlopt_set_initial_step1(opt_egm, 0.00001);
-
-                        
-                        if (ik == 0) {
-                            x_egm[0] = 0.01;
-                        } else {
-                            x_egm[0] = solver_data_egm->last_h ;
-                        }
-
-                        nlopt_optimize(opt_egm, x_egm, &minf_egm);
-                        
-
-
-                        //sol->h_egm[idx] = x_egm[0];
-                        sol->h_egm[idx] = sol->h[idx];
-                        //sol->V_egm[idx] = -minf_egm;
-                        double [_c, _h] = egm_step(sol->h_egm[idx], sol->c, solver_data, iA);
-                        sol->c_egm[idx] = _c;
-                        sol->h_egm[idx] = _h;
-                        // sol->c_egm[idx] = egm_step(x_egm[0] ,sol->c, solver_data, iA);
-
-                        solver_data_egm->last_h = x_egm[1] / 1.01;
-                        */
+                        solver_data->last_h = x[1] / 1.00;
+                        solver_data->last_c = x[0] * 1.0009;
 
                     }
 

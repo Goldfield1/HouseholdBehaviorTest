@@ -39,6 +39,6 @@
 #ifndef SIMULATE
 #include "simulate.cpp"
 #endif
-#ifndef SINGLE
-#include "single.cpp"
+#ifndef SOLUTION
+#include "solution.cpp"
 #endif
